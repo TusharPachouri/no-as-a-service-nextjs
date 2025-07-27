@@ -9,23 +9,23 @@ export async function POST(request) {
 
   // Create mode-specific prompts with automatic language detection and varying lengths
   const modePrompts = {
-    normal: `You are helping someone politely decline this request/situation: "${prompt}". 
+    normal: `Someone needs to decline this: "${prompt}". 
 
-    IMPORTANT: Analyze the language and tone of the input text and respond in the EXACT same language/style. If they write in English, respond in English. If they write in Hinglish (like "mera dost party me bula rha h"), respond in Hinglish. Match their exact language mixing style.
+    IMPORTANT: Match the exact language/style of the input. English = English response, Hinglish = Hinglish response, etc.
 
-    Generate a direct response they can send/say to the person asking. Keep it SHORT - only 2-3 lines maximum. Make it respectful but firm. This should be something they can copy-paste or say directly to decline the request.`,
+    Write a casual, natural response like how a real person would text/say it. Keep it SHORT (2-3 lines). Sound like a friend texting, not a formal email. Use casual words, contractions, and natural speech patterns. Make it sound human and relatable.`,
 
-    moderate: `You are helping someone assertively decline this request/situation: "${prompt}". 
+    moderate: `Someone needs to decline this: "${prompt}". 
 
-    IMPORTANT: Analyze the language and tone of the input text and respond in the EXACT same language/style. If they write in English, respond in English. If they write in Hinglish (like "mera dost party me bula rha h"), respond in Hinglish. Match their exact language mixing style.
+    IMPORTANT: Match the exact language/style of the input. English = English response, Hinglish = Hinglish response, etc.
 
-    Generate a direct response they can send/say to the person asking. Make it 4-5 lines - more detailed than normal mode. Be assertive and clear about boundaries. This should be something they can copy-paste or say directly to decline the request without being apologetic.`,
+    Write a direct, confident response (4-5 lines) like how a real person would say it when they're done being polite. Sound natural and authentic - use casual language, slang if appropriate, and speak like you're talking to someone you know. No corporate speak or overly polite phrases.`,
 
-    savage: `You are helping someone brutally decline this request/situation: "${prompt}". 
+    savage: `Someone needs to brutally decline this: "${prompt}". 
 
-    IMPORTANT: Analyze the language and tone of the input text and respond in the EXACT same language/style. If they write in English, respond in English. If they write in Hinglish (like "mera dost party me bula rha h"), respond in Hinglish. Match their exact language mixing style.
+    IMPORTANT: Match the exact language/style of the input. English = English response, Hinglish = Hinglish response, etc.
 
-    Generate a direct response they can send/say to the person asking. Make it elaborate - 6 or more lines. Be brutally honest, witty, and memorable. This should be something they can copy-paste or say directly to decline the request in a savage but clever way. Don't talk ABOUT the situation, give them the actual words to say.`
+    Write a savage, witty comeback (6+ lines) that sounds like something a real person would say when they're completely done with the request. Use natural speech, humor, sarcasm, and personality. Sound like you're roasting a friend, not writing a business email. Be clever and memorable while keeping it human and authentic.`
   };
 
   const selectedPrompt = modePrompts[mode] || modePrompts.normal;
