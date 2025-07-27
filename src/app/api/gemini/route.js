@@ -7,19 +7,25 @@ export async function POST(request) {
   const geminiApiKey = process.env.GEMINI_API_KEY;
   const model = "gemini-1.5-flash-latest";
 
-  // Create mode-specific prompts
+  // Create mode-specific prompts with automatic language detection and varying lengths
   const modePrompts = {
-    normal: `You are helping someone politely decline this request/situation: "${prompt}". Generate a professional, polite way they can say "no" to this situation. 
+    normal: `You are helping someone politely decline this request/situation: "${prompt}". 
 
-    Give them one clear response they can use to decline professionally while maintaining good relationships. Make it respectful but firm.`,
+    IMPORTANT: Analyze the language and tone of the input text and respond in the EXACT same language/style. If they write in English, respond in English. If they write in Hinglish (like "mera dost party me bula rha h"), respond in Hinglish. Match their exact language mixing style.
 
-    moderate: `You are helping someone assertively decline this request/situation: "${prompt}". Generate a direct, confident way they can say "no" to this situation.
+    Generate a direct response they can send/say to the person asking. Keep it SHORT - only 2-3 lines maximum. Make it respectful but firm. This should be something they can copy-paste or say directly to decline the request.`,
 
-    Give them one clear response they can use to decline firmly without being apologetic. Make it assertive and clear about their boundaries.`,
+    moderate: `You are helping someone assertively decline this request/situation: "${prompt}". 
 
-    savage: `You are helping someone brutally decline this request/situation: "${prompt}". Generate a witty, savage way they can say "no" to this situation.
+    IMPORTANT: Analyze the language and tone of the input text and respond in the EXACT same language/style. If they write in English, respond in English. If they write in Hinglish (like "mera dost party me bula rha h"), respond in Hinglish. Match their exact language mixing style.
 
-    Give them one memorable response they can use to decline in a funny, brutally honest way. Make it clever and unforgettable while still being somewhat professional.`
+    Generate a direct response they can send/say to the person asking. Make it 4-5 lines - more detailed than normal mode. Be assertive and clear about boundaries. This should be something they can copy-paste or say directly to decline the request without being apologetic.`,
+
+    savage: `You are helping someone brutally decline this request/situation: "${prompt}". 
+
+    IMPORTANT: Analyze the language and tone of the input text and respond in the EXACT same language/style. If they write in English, respond in English. If they write in Hinglish (like "mera dost party me bula rha h"), respond in Hinglish. Match their exact language mixing style.
+
+    Generate a direct response they can send/say to the person asking. Make it elaborate - 6 or more lines. Be brutally honest, witty, and memorable. This should be something they can copy-paste or say directly to decline the request in a savage but clever way. Don't talk ABOUT the situation, give them the actual words to say.`
   };
 
   const selectedPrompt = modePrompts[mode] || modePrompts.normal;

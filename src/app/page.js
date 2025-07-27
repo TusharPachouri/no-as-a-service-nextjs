@@ -14,7 +14,7 @@ export default function NoAsAService() {
       id: "normal",
       label: "Normal",
       icon: Shield,
-      description: "Polite but firm",
+      description: "Brief & polite (2-3 lines)",
       color: "from-blue-500 to-cyan-500",
       textColor: "text-blue-600",
       bgColor: "bg-blue-50",
@@ -24,7 +24,7 @@ export default function NoAsAService() {
       id: "moderate",
       label: "Moderate",
       icon: Zap,
-      description: "Direct and assertive",
+      description: "Direct & detailed (4-5 lines)",
       color: "from-orange-500 to-yellow-500",
       textColor: "text-orange-600",
       bgColor: "bg-orange-50",
@@ -34,7 +34,7 @@ export default function NoAsAService() {
       id: "savage",
       label: "Savage",
       icon: Flame,
-      description: "Brutally honest",
+      description: "Elaborate & brutal (6+ lines)",
       color: "from-red-500 to-pink-500",
       textColor: "text-red-600",
       bgColor: "bg-red-50",
@@ -139,10 +139,10 @@ export default function NoAsAService() {
                         <div className={`p-3 rounded-full mb-3 bg-gradient-to-r ${mode.color} ${isSelected ? 'shadow-lg' : 'opacity-70 group-hover:opacity-100'} transition-opacity duration-300`}>
                           <Icon className="w-6 h-6 text-white" />
                         </div>
-                        <h3 className={`font-bold text-lg mb-2 ${isSelected ? mode.textColor : 'text-white'}`}>
+                        <h3 className={`font-bold text-lg mb-2 ${isSelected ? 'text-gray-800' : 'text-white'}`}>
                           {mode.label}
                         </h3>
-                        <p className={`text-sm ${isSelected ? mode.textColor + '/80' : 'text-gray-400'}`}>
+                        <p className={`text-sm ${isSelected ? 'text-gray-700' : 'text-gray-400'}`}>
                           {mode.description}
                         </p>
                       </div>
