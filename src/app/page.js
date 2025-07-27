@@ -92,7 +92,7 @@ export default function NoAsAService() {
             No as a Service
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            Need to decline a request but don't know how? Let AI craft the perfect "no" for any situation.
+            Need to decline a request but don&apos;t know how? Let AI craft the perfect &quot;no&quot; for any situation.
           </p>
         </div>
 
@@ -169,7 +169,7 @@ export default function NoAsAService() {
                 {isLoading ? (
                   <>
                     <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                    <span>Crafting your perfect "no"...</span>
+                    <span>Crafting your perfect &quot;no&quot;...</span>
                   </>
                 ) : (
                   <>
@@ -203,7 +203,7 @@ export default function NoAsAService() {
                     if (numberedMatch) {
                       return (
                         <div key={index} className="mb-4 flex items-start">
-                          <span className={`inline-block w-8 h-8 rounded-full text-sm font-bold flex items-center justify-center mr-3 mt-1 bg-gradient-to-r ${selectedModeData?.color} text-white flex-shrink-0`}>
+                          <span className={`inline-block w-8 h-8 rounded-full text-sm font-bold items-center justify-center mr-3 mt-1 bg-gradient-to-r ${selectedModeData?.color} text-white flex-shrink-0`}>
                             {numberedMatch[1].replace('.', '')}
                           </span>
                           <p className="text-white text-lg leading-relaxed m-0 flex-1">
@@ -238,7 +238,7 @@ export default function NoAsAService() {
         {/* Footer */}
         <div className="text-center mt-16">
           <p className="text-gray-400">
-            Sometimes the best answer is a well-crafted "no" ✨
+            Sometimes the best answer is a well-crafted &quot;no&quot; ✨
           </p>
         </div>
       </div>
