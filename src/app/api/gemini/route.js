@@ -7,25 +7,31 @@ export async function POST(request) {
   const geminiApiKey = process.env.GEMINI_API_KEY;
   const model = "gemini-1.5-flash-latest";
 
-  // Create mode-specific prompts with automatic language detection and varying lengths
+  // Mode-specific prompts for "Decline-as-a-Service"
   const modePrompts = {
-    normal: `Someone needs to decline this: "${prompt}". 
+    normal: `The user described this situation: "${prompt}".
+They want a friendly, polite way to say "no" in this situation.
 
-    IMPORTANT: Match the exact language/style of the input. English = English response, Hinglish = Hinglish response, etc.
+Your task: Write a short, casual reply (2-3 lines) like how a real person would text a friend.
+- Match the language/style of the input (English, Hinglish, etc.).
+- Keep it light, relatable, and warm — no corporate jargon, no overly formal tone.
+- Make it sound natural and human.`,
 
-    Write a casual, natural response like how a real person would text/say it. Keep it SHORT (2-3 lines). Sound like a friend texting, not a formal email. Use casual words, contractions, and natural speech patterns. Make it sound human and relatable.`,
+    moderate: `The user described this situation: "${prompt}".
+They want a confident, clear way to say "no" in this situation.
 
-    moderate: `Someone needs to decline this: "${prompt}". 
+Your task: Write a firm but polite reply (4-5 lines) like you're talking to someone you know when you’re done being overly nice.
+- Match the language/style of the input (English, Hinglish, etc.).
+- Keep it natural, direct, and easy to understand — you can add a bit of edge or slang if it fits.
+- No robotic or formal-sounding phrases.`,
 
-    IMPORTANT: Match the exact language/style of the input. English = English response, Hinglish = Hinglish response, etc.
+    savage: `The user described this situation: "${prompt}".
+They want a bold, witty way to say "no" in this situation.
 
-    Write a direct, confident response (4-5 lines) like how a real person would say it when they're done being polite. Sound natural and authentic - use casual language, slang if appropriate, and speak like you're talking to someone you know. No corporate speak or overly polite phrases.`,
-
-    savage: `Someone needs to brutally decline this: "${prompt}". 
-
-    IMPORTANT: Match the exact language/style of the input. English = English response, Hinglish = Hinglish response, etc.
-
-    Write a savage, witty comeback (6+ lines) that sounds like something a real person would say when they're completely done with the request. Use natural speech, humor, sarcasm, and personality. Sound like you're roasting a friend, not writing a business email. Be clever and memorable while keeping it human and authentic.`
+Your task: Write a savage, clever comeback (6+ lines) like something you'd say when you’ve had enough.
+- Match the language/style of the input (English, Hinglish, etc.).
+- Use humor, sarcasm, or playful roasting — but keep it conversational and human.
+- Make it sharp and memorable, like you’re teasing or roasting a friend, not writing a memo.`
   };
 
   const selectedPrompt = modePrompts[mode] || modePrompts.normal;
@@ -54,15 +60,15 @@ export async function POST(request) {
     const data = await response.json();
     const geminiText = data.candidates?.[0]?.content?.parts?.[0]?.text;
 
-    // Clean up the response text for better display
+    // Clean up Gemini’s markdown formatting
     const cleanedResponse = geminiText
-      ?.replace(/\*\*(.*?)\*\*/g, '$1') // Remove markdown bold
-      .replace(/\*(.*?)\*/g, '$1') // Remove markdown italic
+      ?.replace(/\*\*(.*?)\*\*/g, "$1") // remove bold
+      .replace(/\*(.*?)\*/g, "$1") // remove italic
       .trim();
 
-    return NextResponse.json({ 
+    return NextResponse.json({
       geminiResponse: cleanedResponse || "Sorry, I couldn't generate a response right now.",
-      mode: mode,
+      mode,
       originalPrompt: prompt
     });
 
